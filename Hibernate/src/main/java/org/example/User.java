@@ -4,13 +4,11 @@ package org.example;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
+import java.io.Serializable;
 
 @Entity
-@Table(name="USERS")
-public class User {
-
-
+@Table(name="users")
+public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +50,15 @@ public class User {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
     }
 }
 
