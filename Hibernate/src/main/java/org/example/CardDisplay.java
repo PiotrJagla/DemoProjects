@@ -1,23 +1,37 @@
 package org.example;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
+
+@Entity
+@Table(name="cardsindeck")
 public class CardDisplay {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String cardName;
-    private int points;
+    private String cardname;
+    private int cardpoints;
 
-    private int deckId;
+    @ManyToOne
+    @JoinColumn(name="deckid", nullable = false)
+    private Deck deck;
 
-
-
-
-    public int getDeckId() {
-        return deckId;
+    public CardDisplay(String cardname, int cardpoints, Deck deck) {
+        this.cardname = cardname;
+        this.cardpoints = cardpoints;
+        this.deck = deck;
     }
 
-    public void setDeckId(int deckId) {
-        this.deckId = deckId;
+    public CardDisplay() {
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 
     public long getId() {
@@ -28,19 +42,19 @@ public class CardDisplay {
         this.id = id;
     }
 
-    public String getCardName() {
-        return cardName;
+    public String getCardname() {
+        return cardname;
     }
 
-    public void setCardName(String cardName) {
-        this.cardName = cardName;
+    public void setCardname(String cardname) {
+        this.cardname = cardname;
     }
 
-    public int getPoints() {
-        return points;
+    public int getCardpoints() {
+        return cardpoints;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setCardpoints(int cardpoints) {
+        this.cardpoints = cardpoints;
     }
 }
