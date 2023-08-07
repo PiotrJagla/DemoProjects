@@ -57,4 +57,13 @@ public class CardDisplay {
     public void setCardpoints(int cardpoints) {
         this.cardpoints = cardpoints;
     }
+
+    @Override
+    public String toString() {
+        return "CardDisplay{" +
+                "id=" + id +
+                ", cardname='" + cardname + '\'' +
+                ", cardpoints=" + cardpoints +
+                '}';
+    }
 }

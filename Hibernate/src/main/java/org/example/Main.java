@@ -1,6 +1,8 @@
 package org.example;
 
 
+import org.example.OneToOne.Phone;
+import org.example.OneToOne.PhoneDetails;
 import org.hibernate.Session;
 
 import javax.persistence.*;
@@ -11,14 +13,69 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
         System.out.println("Hello world!");
-        oneToMany();
+        oneToOneLoading();
+    }
+    public static void oneToOneSaving() {
+        EntityManagerFactory etf = Persistence.createEntityManagerFactory("test-unit");
+        Session s = etf.createEntityManager().unwrap(Session.class);
+        Phone phone = new Phone();
+        phone.setNumber("123-456-789");
+        PhoneDetails phoneDetails= new PhoneDetails();
+        phoneDetails.setProvider("T-mobile");
+        phoneDetails.setTechnology("5G");
+
+        s.getTransaction().begin();
+        phone.setDetails(phoneDetails);
+        phoneDetails.setPhone(phone);
+        s.persist(phone);
+        s.getTransaction().commit();
+        s.close();
+
+    }
+    public static void oneToOneLoading() {
+        EntityManagerFactory etf = Persistence.createEntityManagerFactory("test-unit");
+        Session s = etf.createEntityManager().unwrap(Session.class);
+
+        s.getTransaction().begin();
+
+//        Phone phone = null;
+        PhoneDetails phoneDetails = null;
+//        phone = s.find(Phone.class, 2l);
+        phoneDetails = s.find(PhoneDetails.class, 2l);
+
+        System.out.println(phoneDetails);
+//        System.out.println(phone);
+
+
+        s.getTransaction().commit();
+        s.close();
+    }
+    public static void oneToManyFetching() {
+        EntityManagerFactory etf = Persistence.createEntityManagerFactory("test-unit");
+        Session s = etf.createEntityManager().unwrap(Session.class);
+
+
+        TypedQuery<Deck> tq = s.createQuery("SELECT d FROM Deck d WHERE username = :uname", Deck.class);
+        tq.setParameter("uname", "piotr");
+        List<Deck> decks = tq.getResultList();
+        decks.forEach(d -> System.out.println(d));
+
+
+//        TypedQuery<CardDisplay> newTq = s.createQuery("SELECT c FROM CardDisplay c WHERE deckid = :did", CardDisplay.class);
+//        for (int i = 0; i < decks.size(); i++) {
+//            System.out.println("For deck | " + decks.get(i).getName() + " | there are cards: ");
+//
+//            newTq.setParameter("did", decks.get(i).getId());
+//            List<CardDisplay> cardsInDeck = newTq.getResultList();
+//            cardsInDeck.forEach(c -> System.out.println());
+//            System.out.println("Owner: " + decks.get(i).getUsername());
+//        }
 
 
 
     }
-    public static void oneToMany() {
+    public static void oneToManySaving() {
         EntityManagerFactory etf = Persistence.createEntityManagerFactory("test-unit");
         Session s = etf.createEntityManager().unwrap(Session.class);
 

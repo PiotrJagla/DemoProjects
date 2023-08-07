@@ -26,6 +26,10 @@ public class Deck {
     public Deck() {
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -48,5 +52,15 @@ public class Deck {
 
     public void setCards(List<CardDisplay> cards) {
         this.cards = cards;
+    }
+
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", cards=" + cards +
+                '}';
     }
 }
