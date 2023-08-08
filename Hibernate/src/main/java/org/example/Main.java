@@ -1,12 +1,12 @@
 package org.example;
 
 
-import org.example.OneToOne.Phone;
-import org.example.OneToOne.PhoneDetails;
+import org.example.OneToOne.Laptop;
+import org.example.OneToOne.Student;
 import org.hibernate.Session;
 
 import javax.persistence.*;
-import java.lang.reflect.Type;
+import javax.swing.plaf.synth.SynthUI;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,22 +14,46 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
-        oneToOneLoading();
+        oneToOneSaving();
+//        oneToOneLoading();
     }
     public static void oneToOneSaving() {
         EntityManagerFactory etf = Persistence.createEntityManagerFactory("test-unit");
         Session s = etf.createEntityManager().unwrap(Session.class);
-        Phone phone = new Phone();
-        phone.setNumber("123-456-789");
-        PhoneDetails phoneDetails= new PhoneDetails();
-        phoneDetails.setProvider("T-mobile");
-        phoneDetails.setTechnology("5G");
+
+        Laptop laptop = new Laptop();
+        laptop.setName("Dell");
+        Laptop laptop2 = new Laptop();
+        laptop2.setName("Lenovo");
+        Laptop laptop3 = new Laptop();
+        laptop3.setName("Asus");
+
+
+        Student student = new Student();
+        student.setName("Navin");
+        student.setMarks(50);
+
+        Student newStudent = new Student();
+        newStudent.setName("Piotr");
+        newStudent.setMarks(55);
+
+        laptop2.setStudents(List.of(student));
+        laptop3.setStudents(List.of(student));
+        laptop.setStudents(List.of(newStudent));
+
+
 
         s.getTransaction().begin();
-        phone.setDetails(phoneDetails);
-        phoneDetails.setPhone(phone);
-        s.persist(phone);
+
+        s.persist(student);
+        s.persist(newStudent);
+        s.persist(laptop);
+        s.persist(laptop2);
+        s.persist(laptop3);
+
+
         s.getTransaction().commit();
+
         s.close();
 
     }
@@ -39,14 +63,11 @@ public class Main {
 
         s.getTransaction().begin();
 
-//        Phone phone = null;
-        PhoneDetails phoneDetails = null;
-//        phone = s.find(Phone.class, 2l);
-        phoneDetails = s.find(PhoneDetails.class, 2l);
-
-        System.out.println(phoneDetails);
-//        System.out.println(phone);
-
+//        TypedQuery<Student> tq = s.createQuery("Select s FROM Student s", Student.class);
+//        List<Student> students = tq.getResultList();
+//        System.out.println(students);
+        Student stu = s.find(Student.class, 25);
+        System.out.println(stu);
 
         s.getTransaction().commit();
         s.close();
