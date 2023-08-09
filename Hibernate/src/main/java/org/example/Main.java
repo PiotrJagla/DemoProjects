@@ -1,9 +1,13 @@
 package org.example;
 
 
+import org.example.Annotations.Tyre;
+import org.example.Annotations.Vehicle;
 import org.example.OneToOne.Laptop;
 import org.example.OneToOne.Student;
 import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.persistence.*;
 import javax.swing.plaf.synth.SynthUI;
@@ -13,9 +17,13 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        oneToOneSaving();
-//        oneToOneLoading();
+
+        ApplicationContext appCon = new ClassPathXmlApplicationContext("spring.xml");
+//        Vehicle v = (Vehicle)appCon.getBean("bike");
+//        v.drive();
+
+        Tyre t = (Tyre)appCon.getBean("tyre");
+        System.out.println(t);
     }
     public static void oneToOneSaving() {
         EntityManagerFactory etf = Persistence.createEntityManagerFactory("test-unit");
