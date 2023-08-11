@@ -1,13 +1,12 @@
 package org.example;
 
+
 import javax.persistence.*;
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="users")
-public class User implements Serializable {
+@Table(name="apartments")
+public class Apartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,17 +14,8 @@ public class User implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "user")
-    private List<Room> rooms;
-
-
-    public List<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
+    @ManyToMany
+    private List<Tenant> locators;
 
     public int getId() {
         return id;
@@ -43,12 +33,20 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public List<Tenant> getLocators() {
+        return locators;
+    }
+
+    public void setLocators(List<Tenant> locators) {
+        this.locators = locators;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
+        return "Apartment{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", rooms=" + rooms +
+                ", locators=" + locators +
                 '}';
     }
 }
