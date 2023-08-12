@@ -18,9 +18,12 @@ public class Main {
     }
     private static void hibernate() {
         EntityManagerFactory etf = Persistence.createEntityManagerFactory("test-unit");
-        Session s =  etf.createEntityManager().unwrap(Session.class);
+        EntityManager s =  etf.createEntityManager();
 
         s.getTransaction().begin();
+        Data d1 = new Data().setAge("16").setWeigth("77 kg").setPhone("111222333");
+        Data d2 = new Data().setAge("46").setWeigth("27 kg").setPhone("123456789");
+
 
         Apartment a1 = new Apartment();
         a1.setName("stary Budynek");
@@ -29,8 +32,10 @@ public class Main {
 
         Tenant t1 = new Tenant();
         t1.setName("Sztanga");
+        t1.setData(d1);
         Tenant t2 = new Tenant();
         t2.setName("ZIemia");
+        t2.setData(d2);
 
         a1.setLocators(List.of(t1,t2));
         a2.setLocators(List.of(t2));
@@ -44,29 +49,32 @@ public class Main {
         s.persist(a2);
         t1.setName("zmieniony po persist");
 
+        s.detach(a1);
+        a1.setName("nie powino sie pokazac to");
+
 
         s.getTransaction().commit();
         s.getTransaction().begin();
-        a1.setName("zmieniony po commit");
+
+        TypedQuery<Apartment> tq = s.createQuery("SELECT a FROM Apartment a", Apartment.class);
+        List<Apartment> apartments = tq.getResultList();
+        for (Apartment a : apartments) {
+            System.out.println("Locators of apartment with name: " + a.getName());
+            a.getLocators().forEach(l -> System.out.println(l.getName() + l.getData()));
+        }
+
+        List<Tenant> tenants = s.createQuery("SELECT t FROM Tenant t", Tenant.class).getResultList();
+        for (Tenant t : tenants) {
+            System.out.println("tenant of name: " + t.getName() + " is living in bildings with name: ");
+            t.getLivingPlaces().forEach(a -> System.out.println(a.getName()));
+        }
+
+
+        Apartment a3 = s.find(Apartment.class, 1);
+        a3.setName("changed");
+
         s.getTransaction().commit();
-//        s.getTransaction().begin();
-//
-//        TypedQuery<Apartment> tq = s.createQuery("SELECT a FROM Apartment a", Apartment.class);
-//        List<Apartment> apartments = tq.getResultList();
-//        for (Apartment a : apartments) {
-//            System.out.println("Locators of apartment with name: " + a.getName());
-//            a.getLocators().forEach(l -> System.out.println(l.getName()));
-//        }
-//
-//        List<Tenant> tenants = s.createQuery("SELECT t FROM Tenant t", Tenant.class).getResultList();
-//        for (Tenant t : tenants) {
-//            System.out.println("tenant of name: " + t.getName() + " is living in bildings with name: ");
-//            t.getLivingPlaces().forEach(a -> System.out.println(a.getName()));
-//        }
-//
-//        s.getTransaction().commit();
         s.close();
-        a2.setName("zmieniony po close");
 
 
     }

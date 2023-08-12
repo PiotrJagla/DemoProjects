@@ -2,6 +2,7 @@ package org.example;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,6 +14,9 @@ public class Tenant {
     private int id;
 
     private String name;
+
+    @Embedded
+    private Data data;
 
     @ManyToMany
     private List<Apartment> livingPlaces;
@@ -31,6 +35,14 @@ public class Tenant {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
     }
 
     public List<Apartment> getLivingPlaces() {
