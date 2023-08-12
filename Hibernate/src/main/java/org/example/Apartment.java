@@ -41,6 +41,7 @@ public class Apartment {
         this.locators = locators;
     }
 
+
     @Override
     public String toString() {
         return "Apartment{" +

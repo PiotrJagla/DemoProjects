@@ -42,25 +42,31 @@ public class Main {
         s.persist(t2);
         s.persist(a1);
         s.persist(a2);
+        t1.setName("zmieniony po persist");
+
 
         s.getTransaction().commit();
         s.getTransaction().begin();
-
-        TypedQuery<Apartment> tq = s.createQuery("SELECT a FROM Apartment a", Apartment.class);
-        List<Apartment> apartments = tq.getResultList();
-        for (Apartment a : apartments) {
-            System.out.println("Locators of apartment with name: " + a.getName());
-            a.getLocators().forEach(l -> System.out.println(l.getName()));
-        }
-
-        List<Tenant> tenants = s.createQuery("SELECT t FROM Tenant t", Tenant.class).getResultList();
-        for (Tenant t : tenants) {
-            System.out.println("tenant of name: " + t.getName() + " is living in bildings with name: ");
-            t.getLivingPlaces().forEach(a -> System.out.println(a.getName()));
-        }
-
+        a1.setName("zmieniony po commit");
         s.getTransaction().commit();
+//        s.getTransaction().begin();
+//
+//        TypedQuery<Apartment> tq = s.createQuery("SELECT a FROM Apartment a", Apartment.class);
+//        List<Apartment> apartments = tq.getResultList();
+//        for (Apartment a : apartments) {
+//            System.out.println("Locators of apartment with name: " + a.getName());
+//            a.getLocators().forEach(l -> System.out.println(l.getName()));
+//        }
+//
+//        List<Tenant> tenants = s.createQuery("SELECT t FROM Tenant t", Tenant.class).getResultList();
+//        for (Tenant t : tenants) {
+//            System.out.println("tenant of name: " + t.getName() + " is living in bildings with name: ");
+//            t.getLivingPlaces().forEach(a -> System.out.println(a.getName()));
+//        }
+//
+//        s.getTransaction().commit();
         s.close();
+        a2.setName("zmieniony po close");
 
 
     }
