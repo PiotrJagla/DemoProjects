@@ -6,7 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="MavenPlay" />
+        <module name="PeopleModule" />
+        <module name="HouseModule" />
+        <module name="WhatIsThatModule" />
       </profile>
     </annotationProcessing>
   </component>
