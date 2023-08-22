@@ -9,4 +9,9 @@ public class Tests {
     public void test() {
         assertEquals(2, 1 + 1);
     }
+
+    @Test
+    public void thisIsAnotherTest() {
+        
+    }
 }
