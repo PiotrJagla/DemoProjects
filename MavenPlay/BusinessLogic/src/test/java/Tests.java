@@ -12,6 +12,6 @@ public class Tests {
 
     @Test
     public void thisIsAnotherTest() {
-        
+
     }
 }
