@@ -2,13 +2,16 @@ package com.example.thebestide;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
+
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private TextArea sourceCode;
+
+    public void compile() {
+        System.out.println(sourceCode.getText());
     }
 }
