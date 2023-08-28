@@ -6,13 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="BusinessLogic" />
+        <module name="NowyModule" />
         <module name="ControllersREST" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="BusinessLogic" target="18" />
       <module name="HouseModule" target="18" />
       <module name="PeopleModule" target="18" />
+      <module name="untitled" target="18" />
       <module name="WhatIsThatModule" target="18" />
     </bytecodeTargetLevel>
   </component>

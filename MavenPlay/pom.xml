@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>BusinessLogic</module>
         <module>ControllersREST</module>
+        <module>NowyModule</module>
     </modules>
 
     <properties>

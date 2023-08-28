@@ -9,9 +9,11 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/BusinessLogic/pom.xml" />
         <option value="$PROJECT_DIR$/HouseModule/pom.xml" />
         <option value="$PROJECT_DIR$/PeopleModule/pom.xml" />
         <option value="$PROJECT_DIR$/WhatIsThatModule/pom.xml" />
+        <option value="$PROJECT_DIR$/untitled/pom.xml" />
       </set>
     </option>
   </component>
