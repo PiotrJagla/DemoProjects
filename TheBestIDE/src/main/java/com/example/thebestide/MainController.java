@@ -5,6 +5,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.*;
+import java.util.Scanner;
 
 
 public class MainController {
@@ -18,11 +19,17 @@ public class MainController {
     @FXML
     private TextField fileName;
 
-    public MainController() {
+    @FXML
+    private TextArea outputArea;
 
+
+    public MainController() {
+        outputArea = new TextArea();
+        outputArea.setEditable(false);
     }
 
     public void printToConsole() {
+        outputArea.clear();
         ProcessBuilder pb = new ProcessBuilder("pwd");
         pb.directory(new File(srcDir));
         try {
@@ -37,14 +44,8 @@ public class MainController {
             }
 
             int exitValue = p.waitFor();
-            if(exitValue == 0) {
-                System.out.println("SUCCESS!");
-                System.out.println(output);
-            }
-            else {
-                System.out.println("NOT success, exit code " + exitValue);
-                System.out.println(output);
-            }
+            System.out.println("exit code " + exitValue);
+            outputArea.setText(output.toString());
 
         } catch (IOException | InterruptedException e) {
             System.out.println(e.getMessage());
@@ -124,7 +125,50 @@ public class MainController {
     }
 
     public void open() {
-        File openTo = new File(srcDir + "/" + currentFile);
+        StringBuffer fileContent = new StringBuffer();
+        try {
+            File openTo = new File(srcDir + "/" + fileName.getText());
+            Scanner myReader = new Scanner(openTo);
+            while(myReader.hasNextLine()) {
+                fileContent.append(myReader.nextLine() + "\n");
+            }
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        sourceCode.setText(fileContent.toString());
+    }
+
+    public void compile() {
+        save();
+        outputArea.clear();
+        ProcessBuilder pb = new ProcessBuilder("java", fileName.getText());
+        pb.directory(new File(srcDir));
+        try {
+            Process p = pb.start();
+            StringBuilder output = new StringBuilder();
+
+            BufferedReader reader= new BufferedReader(new InputStreamReader(p.getInputStream()));
+            BufferedReader errorReader= new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+            String line;
+            while((line = reader.readLine()) != null) {
+                output.append(line + '\n');
+            }
+
+            while((line = errorReader.readLine()) != null) {
+                output.append(line + '\n');
+            }
+
+            int exitValue = p.waitFor();
+            System.out.println("exit code " + exitValue);
+            outputArea.setText(output.toString());
+            outputArea.setText(output.toString());
+
+        } catch (IOException | InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
+
 
     }
 
