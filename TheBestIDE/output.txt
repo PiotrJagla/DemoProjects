@@ -1,0 +1,10 @@
+to jest zapisane z kodu javyto jest jeszcze jedna liniaCountint: 0
+Countint: 1
+Countint: 2
+Countint: 3
+Countint: 4
+Countint: 5
+Countint: 6
+Countint: 7
+Countint: 8
+Countint: 9

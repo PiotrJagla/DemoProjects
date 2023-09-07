@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.thebestide.MainController">
    <children>
       <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#printToConsole" text="show files" />
-      <TextArea fx:id="sourceCode" layoutX="20.0" layoutY="14.0" prefHeight="324.0" prefWidth="572.0" />
-      <TextField fx:id="fileName" layoutX="437.0" layoutY="349.0" />
-      <Button layoutX="93.0" layoutY="362.0" mnemonicParsing="false" onAction="#createFile" text="create file" />
-      <Button layoutX="174.0" layoutY="362.0" mnemonicParsing="false" onAction="#open" text="open file" />
-      <Button layoutX="254.0" layoutY="362.0" mnemonicParsing="false" onAction="#save" text="save file" />
-      <Button layoutX="328.0" layoutY="362.0" mnemonicParsing="false" onAction="#compile" text="Compile" />
-      <TextArea fx:id="outputArea" layoutX="592.0" layoutY="14.0" prefHeight="324.0" prefWidth="260.0" />
    </children>
 </AnchorPane>

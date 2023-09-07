@@ -13,164 +13,99 @@ public class MainController {
 
     private String currentFile;
 
-    @FXML
-    private TextArea sourceCode;
-
-    @FXML
-    private TextField fileName;
-
-    @FXML
-    private TextArea outputArea;
-
-
-    public MainController() {
-        outputArea = new TextArea();
-        outputArea.setEditable(false);
-    }
-
     public void printToConsole() {
-        outputArea.clear();
-        ProcessBuilder pb = new ProcessBuilder("pwd");
-        pb.directory(new File(srcDir));
+        ObjectState s = new ObjectState();
+        s.setName("piotrek");
+        s.setSurname("Jagla");
+        s.setAge(20);
+
         try {
-            Process p = pb.start();
-            StringBuilder output = new StringBuilder();
+            FileOutputStream fileOutputStream = new FileOutputStream("testFile.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-            BufferedReader reader= new BufferedReader(new InputStreamReader(p.getInputStream()));
+            objectOutputStream.writeObject(s);
+            objectOutputStream.flush();
+            objectOutputStream.close();
 
-            String line;
-            while((line = reader.readLine()) != null) {
-                output.append(line + '\n');
-            }
+            FileInputStream fileInputStream = new FileInputStream("testFile.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            int exitValue = p.waitFor();
-            System.out.println("exit code " + exitValue);
-            outputArea.setText(output.toString());
+            ObjectState s2 = (ObjectState) objectInputStream.readObject();
+            objectInputStream.close();
 
-        } catch (IOException | InterruptedException e) {
+            System.out.println(s);
+            System.out.println(s2);
+
+        }
+        catch(Exception e ) {
             System.out.println(e.getMessage());
         }
 
-        pb = new ProcessBuilder("ls");
-        pb.directory(new File(srcDir));
         try {
-            Process p = pb.start();
-            StringBuilder output = new StringBuilder();
-
-            BufferedReader reader= new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-            String line;
-            while((line = reader.readLine()) != null) {
-                output.append(line + '\n');
+            BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
+            writer.write("to jest zapisane z kodu javy");
+            writer.write("to jest jeszcze jedna linia");
+            for (int i = 0; i < 10; i++) {
+                writer.write("Countint: " + i + "\n");
             }
-
-            int exitValue = p.waitFor();
-            if(exitValue == 0) {
-                System.out.println("SUCCESS!");
-                System.out.println(output);
-            }
-            else {
-                System.out.println("NOT success, exit code " + exitValue);
-                System.out.println(output);
-            }
-
-        } catch (IOException | InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    public void createFile() {
-        ProcessBuilder pb = new ProcessBuilder("touch" , fileName.getText());
-        pb.directory(new File(srcDir));
-        try {
-            Process p = pb.start();
-            p.waitFor();
-        }
-        catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void save() {
-        try {
-            FileWriter writer = new FileWriter(srcDir + "/" + fileName.getText());
-            writer.write(sourceCode.getText());
             writer.close();
+
+            ProcessBuilder pb = new ProcessBuilder("cat", "output.txt");
+            Process p = pb.start();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            reader.close();
         }
         catch(Exception e) {
             System.out.println(e.getMessage());
-        }
 
-        ProcessBuilder pb = new ProcessBuilder("cat", fileName.getText());
-        pb.directory(new File(srcDir));
-        try {
-            Process p = pb.start();
-            StringBuilder output = new StringBuilder();
-
-            BufferedReader reader= new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-            String line;
-            while((line = reader.readLine()) != null) {
-                output.append(line + '\n');
-            }
-
-            int exitValue = p.waitFor();
-            System.out.println("exit code " + exitValue);
-            System.out.println(output);
-        } catch (IOException | InterruptedException e) {
-            System.out.println(e.getMessage());
         }
 
     }
 
-    public void open() {
-        StringBuffer fileContent = new StringBuffer();
-        try {
-            File openTo = new File(srcDir + "/" + fileName.getText());
-            Scanner myReader = new Scanner(openTo);
-            while(myReader.hasNextLine()) {
-                fileContent.append(myReader.nextLine() + "\n");
-            }
-        }
-        catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-        sourceCode.setText(fileContent.toString());
+
+}
+
+class ObjectState implements Serializable{
+    private static final long serializationUID = 1l;
+    private String name;
+    private String surname;
+    private int age;
+
+    public String getName() {
+        return name;
     }
 
-    public void compile() {
-        save();
-        outputArea.clear();
-        ProcessBuilder pb = new ProcessBuilder("java", fileName.getText());
-        pb.directory(new File(srcDir));
-        try {
-            Process p = pb.start();
-            StringBuilder output = new StringBuilder();
-
-            BufferedReader reader= new BufferedReader(new InputStreamReader(p.getInputStream()));
-            BufferedReader errorReader= new BufferedReader(new InputStreamReader(p.getErrorStream()));
-
-            String line;
-            while((line = reader.readLine()) != null) {
-                output.append(line + '\n');
-            }
-
-            while((line = errorReader.readLine()) != null) {
-                output.append(line + '\n');
-            }
-
-            int exitValue = p.waitFor();
-            System.out.println("exit code " + exitValue);
-            outputArea.setText(output.toString());
-            outputArea.setText(output.toString());
-
-        } catch (IOException | InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
-
-
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
 
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "ObjectState{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
