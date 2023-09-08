@@ -22,6 +22,8 @@ const getFirstName = async(): Promise<isThisName> => {
     });
 }
 
+
+
 const getName = async(): Promise<isThisName> => {
     const responseOfFetch = await fetch("http://localhost:4000/");
     return await responseOfFetch.json();
