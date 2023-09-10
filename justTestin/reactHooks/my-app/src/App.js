@@ -3,25 +3,64 @@ import React,{useState, useEffect} from 'react';
 
 
 const App = () => {
-  const [resourceType, setResourceType] = useState('posts')
+  const [count, setCount] = useState(5);
 
-  // useEffect(() => {
-  //   console.log('render')
+  const firstPromise = () => {
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        // res(console.log("first promise"))
+        res(1)
+      }, 100)
+    })
+  }
 
-  // }, [resourceType])
-  useEffect(() => {
-    console.log('render')
+  const secondPromise = () => {
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        // res(console.log("second promise"))
+        res(4)
+      }, 10000)
+    })
 
-  })
+  }
 
-  return (
-    <div className="App">
-      <button onClick={() => setResourceType('posts')}>Posts</button>
-      <button onClick={() => setResourceType('users')}>Users</button>
-      <button onClick={() => setResourceType('comments')}>Comments</button>
-      <h1>{resourceType}</h1>
+  const click = () => {
+    Promise.all([secondPromise(), firstPromise()]).then((values) => {
+      console.log(values)
+    })
+    // console.log(secondPromise())
+  }
+
+
+  const show = () => {
+    console.log(count);
+
+  }
+
+  return(
+    <div>
+      <button onClick={click}>click</button>
+      <button onClick={show}>show</button>
+
     </div>
-  );
-}
+
+  )
+} 
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
