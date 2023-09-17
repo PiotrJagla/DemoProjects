@@ -5,7 +5,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Vector;
 
 
 public class MainController {
@@ -15,60 +18,61 @@ public class MainController {
 
     public void printToConsole() {
         ObjectState s = new ObjectState();
-        s.setName("piotrek");
-        s.setSurname("Jagla");
-        s.setAge(20);
+        s.setName("name");
+        s.setSurname("surname");
+        s.setAge(16);
+        ObjectState s2 = new ObjectState();
+        s2.setName("other name");
+        s2.setSurname("other surname");
+        s2.setAge(196);
 
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("testFile.txt");
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+//            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./proj/test.txt"));
+//            oos.writeObject(s);
+//            oos.writeObject(s2);
+//            oos.close();
+//            printFileContent();
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./proj/test.txt"));
+            ObjectState in;
+            List<ObjectState> objects = new ArrayList<>();
+            while((in = (ObjectState) ois.readObject()) != null) {
+                objects.add(in);
+            }
+            System.out.println(objects);
 
-            objectOutputStream.writeObject(s);
-            objectOutputStream.flush();
-            objectOutputStream.close();
 
-            FileInputStream fileInputStream = new FileInputStream("testFile.txt");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            ObjectState s2 = (ObjectState) objectInputStream.readObject();
-            objectInputStream.close();
-
-            System.out.println(s);
-            System.out.println(s2);
-
-        }
-        catch(Exception e ) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
-            writer.write("to jest zapisane z kodu javy");
-            writer.write("to jest jeszcze jedna linia");
-            for (int i = 0; i < 10; i++) {
-                writer.write("Countint: " + i + "\n");
-            }
-            writer.close();
 
-            ProcessBuilder pb = new ProcessBuilder("cat", "output.txt");
+    }
+
+    public void printFileContent() {
+        ProcessBuilder pb = new ProcessBuilder("cat", "test.txt");
+        pb.directory(new File(srcDir));
+
+        try {
             Process p = pb.start();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line;
-            while((line = reader.readLine()) != null) {
+            while((line = br.readLine()) != null) {
                 System.out.println(line);
             }
-            reader.close();
-        }
-        catch(Exception e) {
+            int exitVal = p.waitFor();
+
+            System.out.println(exitVal + " with code this is the code");
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-
         }
-
     }
 
 
 }
+
+
 
 class ObjectState implements Serializable{
     private static final long serializationUID = 1l;
@@ -109,3 +113,4 @@ class ObjectState implements Serializable{
                 '}';
     }
 }
+
