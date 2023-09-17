@@ -1,18 +1,49 @@
-function mergeSort(arr: number[]) :number[] {
+function mergeSort(arr: number[]){
     let l:number = arr.length;
-    let middle:number = l/2;
-    if(middle = 0) {
-        return arr;
+    if(l === 1) {
+        return;
     }
+    let middle:number = l/2;
 
-    let left: number[] = arr.slice(0, middle - 1); 
-    let right: number[] = arr.slice(middle + 1, l);
-    console.log(arr);
-    console.log(left);
-    console.log(right);
+    let left: number[] = arr.slice(0, middle); 
+    let right: number[] = arr.slice(middle, l);
     mergeSort(left);
     mergeSort(right);
+
+
+    let k = 0;
+    let i = 0;
+    let j = 0;
+    while(i < left.length && j < right.length){ 
+        if(left[i] <= right[j]) {
+            arr[k] = left[i];
+            i++;
+        }
+        else {
+            arr[k] = right[j];
+            j++;
+        }
+        ++k;
+    }
+
+    while(i < left.length) {
+        arr[k] = left[i];
+        k++;
+        i++;
+    }
+    while(j < right.length) {
+        arr[k] = right[j];
+        k++;
+        j++;
+    }
+
 }
 
 
-mergeSort([3,5,1,2,6,2,6,3,7,8,3]);
+let arr = [3,5,1,2,6,2,6,3,7,8,3];
+mergeSort(arr);
+console.log(arr);
+//let arr: number[] = [1,2,3,4,5];
+//console.log(arr.slice(0,arr.length/2));
+//console.log(arr.slice(arr.length/2,arr.length));
+
