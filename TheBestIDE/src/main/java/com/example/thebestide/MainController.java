@@ -17,34 +17,12 @@ public class MainController {
     private String currentFile;
 
     public void printToConsole() {
-        ObjectState s = new ObjectState();
-        s.setName("name");
-        s.setSurname("surname");
-        s.setAge(16);
-        ObjectState s2 = new ObjectState();
-        s2.setName("other name");
-        s2.setSurname("other surname");
-        s2.setAge(196);
+        List<CardDisplay> deck = new ArrayList<>() {{
+            add(new CardDisplay().setPoints(10).setName("Giant"));
+            add(new CardDisplay().setPoints(1).setName("Mouse"));
+            add(new CardDisplay().setPoints(3).setName("WItch"));
 
-        try {
-//            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./proj/test.txt"));
-//            oos.writeObject(s);
-//            oos.writeObject(s2);
-//            oos.close();
-//            printFileContent();
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./proj/test.txt"));
-            ObjectState in;
-            List<ObjectState> objects = new ArrayList<>();
-            while((in = (ObjectState) ois.readObject()) != null) {
-                objects.add(in);
-            }
-            System.out.println(objects);
-
-
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        }};
 
 
     }
@@ -70,6 +48,29 @@ public class MainController {
     }
 
 
+}
+
+class CardDisplay{
+    private String name;
+    private int points;
+
+    public String getName() {
+        return name;
+    }
+
+    public CardDisplay setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public CardDisplay setPoints(int points) {
+        this.points = points;
+        return this;
+    }
 }
 
 
