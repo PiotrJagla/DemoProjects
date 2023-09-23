@@ -13,291 +13,166 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.mongodb.client.model.Filters.eq;
-
 public class Main {
 
-    private static final String connectionString = "mongodb://localhost:27017";
+    public static final String connectionString = "mongodb://localhost:27017";
     public static void main(String[] args) {
 
-        try (MongoClient mongoClient = MongoClients.create(connectionString)) {
-            MongoDatabase mongoDatabase = mongoClient.getDatabase("cardgame");
-            MongoCollection<Document> collection = mongoDatabase.getCollection("decks");
+        CRUD crud = new MongoDB();
+        crud.createDeck("df", "talisfddsfa");
+
+        List<Deck> decks = crud.getAllDecks();
+        decks.forEach(System.out::println);
 
 
-            //______________________________MONGODB
-            //GET DECKS
-//            Document query = new Document();
-//            query.put("deckname", "potwory");
-//            query.put("username", "piotrek");
-//
-//            Document res = collection.find(query).first();
-//            List<Document> cardsInDoc = (List<Document>)res.get("cards");
-//            List<CardDisplay> gettedCardDisplays = new ArrayList<>();
-//            for (int i = 0; i < cardsInDoc.size(); i++) {
-//                gettedCardDisplays.add(
-//                        new CardDisplay(
-//                                (String)cardsInDoc.get(i).get("name"), (int)cardsInDoc.get(i).get("points")
-//                        )
-//                );
-//
-//            }
-//            Deck retrievedDeck = new Deck();
-//            retrievedDeck.setUsername((String)res.get("username"));
-//            retrievedDeck.setDeckname((String)res.get("deckname"));
-//            retrievedDeck.setCards(gettedCardDisplays);
-//            System.out.println(retrievedDeck);
-
-            //FIND MANY THINGS
-//            Document searchQuery = new Document();
-//            searchQuery.put("points", 1);
-//            FindIterable<Document> cursor = collection.find(searchQuery);
-//            Document result = collection.find(searchQuery).first();
-//            System.out.println(result.get("points"));
-//
-//            try (final MongoCursor<Document> cursorIterator = cursor.cursor()) {
-//                while (cursorIterator.hasNext()) {
-//                    System.out.println(cursorIterator.next());
-//                }
-//            }
-
-            //ADD CARD TO ARRAY
-//            Document findQuery = new Document();
-//            findQuery.put("username", "piotrek");
-//            findQuery.put("deckname", "ludzie");
-//
-//            Document updateQuery = new Document();
-//
-//            Document kartaDoPushniecia = new Document();
-//            kartaDoPushniecia.put("name", "breaker");
-//            kartaDoPushniecia.put("points", 2);
-//
-//            Document pushDoc = new Document();
-//            pushDoc.put("cards", kartaDoPushniecia);
-//
-//            updateQuery.put("$push", pushDoc);
-//
-//            collection.updateMany(findQuery, updateQuery);
-
-
-            //Delete card from array
-//            Document findQuery = new Document(){{
-//                put("username", "piotrek"); put("deckname", "potwory");
-//            }};
-//            findQuery.put("username", "piotrek");
-//            findQuery.put("deckname", "potwory");
-//
-//            Document cardToDelte = new Document() {{put("name", "burn"); put("points", 0); }};
-//
-//            Document pushToCards = new Document() {{ put("cards", cardToDelte); }};
-//
-//            Document updateQuery = new Document() {{put("$pull", pushToCards); }};
-//
-//            collection.updateMany(findQuery, updateQuery);
-
-            //CreateDeck
-//            Deck newDeck = new Deck();
-//            newDeck.setUsername("ami");
-//            newDeck.setDeckname("transformice");
-//
-//            Document newDeckDoc = new Document(){{
-//                put("username", newDeck.getUsername());
-//                put("deckname", newDeck.getDeckname());
-//                put("cards", List.of());
-//            }};
-//
-//            collection.insertOne(newDeckDoc);
-
-            //Delete deck
-//            Document deckToDelete = new Document() {{
-//               put("username", "ami");
-//                put("deckname", "transformice");
-//            }};
-//
-//            collection.deleteOne(deckToDelete);
-
-
-
-            //INSERT DECKS
-//            Deck d1 = new Deck();
-//            d1.setCards(List.of(
-//                    new CardDisplay("knight", 4),
-//                    new CardDisplay("burn", 0),
-//                    new CardDisplay("giant", 9)));
-//            d1.setUsername("piotrek");
-//            d1.setDeckname("potwory");
-//            Deck d2 = new Deck();
-//            d2.setCards(List.of(
-//                    new CardDisplay("archer", 2),
-//                    new CardDisplay("wild roam", 3),
-//                    new CardDisplay("sharpshooter", 5)));
-//            d2.setUsername("piotrek");
-//            d2.setDeckname("ludzie");
-//
-//            List<Document> docCards = new ArrayList<>();
-//            for (int i = 0; i < d1.getCards().size(); i++) {
-//                Document d = new Document();
-//                d.put("name", d1.getCards().get(i).getName());
-//                d.put("points", d1.getCards().get(i).getPoints());
-//                docCards.add(d);
-//            }
-//            Document deck1 = new Document();
-//            deck1.put("username", d1.getUsername());
-//            deck1.put("deckname", d1.getDeckname());
-//            deck1.put("cards", docCards);
-//
-//            List<Document> docCards2 = new ArrayList<>();
-//            for (int i = 0; i < d2.getCards().size(); i++) {
-//                Document d = new Document();
-//                d.put("name", d2.getCards().get(i).getName());
-//                d.put("points", d2.getCards().get(i).getPoints());
-//                docCards2.add(d);
-//            }
-//            Document deck2 = new Document();
-//            deck2.put("username", d2.getUsername());
-//            deck2.put("deckname", d2.getDeckname());
-//            deck2.put("cards", docCards2);
-//
-//            collection.insertMany(List.of(deck1, deck2));
-
-
-
-            //______________________________FileSTREAM
-
-            //WRITING DECK
-            Deck d1 = new Deck();
-            d1.setUsername("ami");
-            d1.setDeckname("talia");
-            d1.setCards(List.of(new CardDisplay("telefon", 1), new CardDisplay("mileczenie", 2)));
-
-            Deck d2 = new Deck();
-            d2.setUsername("piotrek");
-            d2.setDeckname("ludzie");
-            d2.setCards(List.of(new CardDisplay("lucznik", 1), new CardDisplay("smok", 2)));
-            List<Deck> decksToSerialize = List.of(d1,d2);
-
-            try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("decks.txt"));
-                objectOutputStream.writeObject(decksToSerialize);
-                objectOutputStream.close();
-
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-
-            //READING DECK
-//            try {
-//                ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("decks.txt"));
-//                List<Deck> decks;
-//                decks = (List) objectInputStream.readObject();
-//                decks.forEach(System.out::println);
-//                objectInputStream.close();
-//
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-
-            //ADD CARD TO DECK
-//            try {
-//                ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("decks.txt"));
-//                List<Deck> decks;
-//                decks = (List) objectInputStream.readObject();
-//
-//                Deck deckToChange = decks.stream().filter(d -> d.getUsername().equals("ami") && d.getDeckname().equals("talia"))
-//                                .findFirst().orElse(new Deck());
-//
-//                List<CardDisplay> cards;
-//                cards = deckToChange.getCards().stream().collect(Collectors.toList());
-//                cards.add(new CardDisplay("wild roam", 3));
-//                deckToChange.setCards(cards);
-//
-//
-//                ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream("decks.txt"));
-//                ous.writeObject(decks);
-//                ous.close();
-//                objectInputStream.close();
-//                objectInputStream = new ObjectInputStream(new FileInputStream("decks.txt"));
-//
-//                List<Deck> deckss = (List) objectInputStream.readObject();
-//                deckss.forEach(System.out::println);
-//
-//                objectInputStream.close();
-//
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-
-            //DELETE CARD FROM DECK
-
-//            try {
-//                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("decks.txt"));
-//
-//                ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream("decks.txt"));
-//                List<Deck> decks = (List)ois.readObject();
-//
-//                Deck deckToChange = decks.stream()
-//                        .filter(d -> d.getDeckname().equals("talia") && d.getUsername().equals("ami"))
-//                        .findFirst().orElse(new Deck());
-//
-//                List<CardDisplay> cards = deckToChange.getCards().stream().collect(Collectors.toList());
-//                cards.remove(new CardDisplay("wild roam",3 ) );
-//                deckToChange.setCards(cards);
-//
-//                System.out.println(deckToChange);
-//
-//
-//                ous.writeObject(decks);
-//                ois.close();
-//                ous.close();
-//                ois = new ObjectInputStream(new FileInputStream("decks.txt"));
-//
-//                List<Deck> deckss = (List)ois.readObject();
-//                deckss.forEach(System.out::println);
-//
-//
-//                ois.close();
-//
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-
-
-
-            //Create file with shell
-//            ProcessBuilder pb = new ProcessBuilder("touch", "decks.txt");
-//
-//            try {
-//                Process p = pb.start();
-//                int e = p.waitFor();
-//                System.out.println("Exited with code: " + e);
-//
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-
-            //TEST
-            try {
-                CardDisplay testData = new CardDisplay("monkey" , 5);
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("test.txt"));
-                ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream("test.txt"));
-
-                CardDisplay readedData = (CardDisplay) ois.readObject();
-//                ous.writeObject(testData);
-
-                System.out.println(readedData);
-
-
-                ous.close();
-                ois.close();
-
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
 
     }
 }
+
+class MongoDB implements CRUD {
+
+
+    @Override
+    public void createDeck(String username, String deckname) {
+        try(MongoClient client = MongoClients.create(Main.connectionString)) {
+            MongoDatabase db = client.getDatabase("cardgame");
+            MongoCollection collection = db.getCollection("cards");
+
+            Document quert = new Document(){{
+                put("deckname", deckname);
+                put("username", username);
+                put("cards", new ArrayList<Document>());
+            }};
+
+            collection.insertOne(quert);
+        }
+
+    }
+
+    @Override
+    public void deleteDeck(String username, String deckname) {
+
+    }
+
+    @Override
+    public void addCard(String username, String deckname, CardDisplay card) {
+
+    }
+
+    @Override
+    public void deleteCard(String username, String deckname, CardDisplay card) {
+
+    }
+
+    @Override
+    public Deck getDeck(String username, String deckname) {
+        return null;
+    }
+
+    @Override
+    public List<Deck> getAllDecks() {
+        try(MongoClient client = MongoClients.create(Main.connectionString)) {
+            MongoDatabase db = client.getDatabase("cardgame");
+            MongoCollection collection = db.getCollection("cards");
+
+
+            FindIterable<Document> cursor = collection.find();
+            List<Deck> decks = new ArrayList<>();
+            try (final MongoCursor<Document> cursorIterator = cursor.cursor()) {
+                while (cursorIterator.hasNext()) {
+                    Document doc = cursorIterator.next();
+                    List<Document> docCards = (List<Document>) doc.get("cards");
+
+                    for (int i = 0; i < docCards.size(); i++) {
+                        
+                    }
+                    
+                    System.out.println(cursorIterator.next());
+                }
+            }
+        }
+        return List.of();
+    }
+}
+
+class FileSerialization implements CRUD  {
+
+    @Override
+    public void createDeck(String username, String deckname) {
+
+        try {
+            ArrayList<Deck> decks = getAllDecks();
+            Deck d = new Deck();
+            d.setDeckname(deckname);
+            d.setUsername(username);
+            decks.add(d);
+
+            ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream("decks.txt"));
+            ous.writeObject(decks);
+            ous.reset();
+            ous.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteDeck(String username, String deckname) {
+
+    }
+
+    @Override
+    public void addCard(String username, String deckname, CardDisplay card) {
+
+    }
+
+    @Override
+    public void deleteCard(String username, String deckname, CardDisplay card) {
+
+    }
+
+    @Override
+    public Deck getDeck(String username, String deckname) {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("decks.txt"));
+            Deck d = (Deck)ois.readObject();
+            System.out.println(d);
+            ois.close();
+            return d;
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return new Deck();
+    }
+
+    @Override
+    public ArrayList<Deck> getAllDecks() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("decks.txt"));
+            ArrayList<Deck> decks = (ArrayList<Deck>)ois.readObject();
+            ois.close();
+            return decks;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return new ArrayList<Deck>();
+    }
+}
+
+
+
+interface CRUD  {
+    void createDeck(String username, String deckname);
+    void deleteDeck(String username, String deckname);
+    void addCard(String username, String deckname, CardDisplay card);
+    void deleteCard(String username, String deckname, CardDisplay card);
+    Deck getDeck(String username, String deckname);
+    List<Deck> getAllDecks();
+}
+
+
+
 
 class Deck implements Serializable{
     private List<CardDisplay> cards;
