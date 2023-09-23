@@ -15,12 +15,16 @@ import java.util.stream.Collectors;
 
 public class Main {
 
+
+
+
     public static final String connectionString = "mongodb://localhost:27017";
     public static void main(String[] args) {
 
         CRUD crud = new MongoDB();
-        crud.createDeck("df", "talisfddsfa");
+//        crud.createDeck("df", "talisfddsfa");
 
+        crud.addCard("df", "talisfddsfa", new CardDisplay("witcher", 12));
         List<Deck> decks = crud.getAllDecks();
         decks.forEach(System.out::println);
 
@@ -31,22 +35,23 @@ public class Main {
 
 class MongoDB implements CRUD {
 
+    private MongoClient client;
+    private MongoDatabase db;
+    private MongoCollection collection;
+
+    public MongoDB() {
+        client = MongoClients.create(Main.connectionString);
+        db = client.getDatabase("cardgame");
+        collection = db.getCollection("decks");
+    }
 
     @Override
     public void createDeck(String username, String deckname) {
-        try(MongoClient client = MongoClients.create(Main.connectionString)) {
-            MongoDatabase db = client.getDatabase("cardgame");
-            MongoCollection collection = db.getCollection("cards");
-
-            Document quert = new Document(){{
-                put("deckname", deckname);
-                put("username", username);
-                put("cards", new ArrayList<Document>());
-            }};
-
-            collection.insertOne(quert);
-        }
-
+        Document quert = new Document(){{
+            put("deckname", deckname);
+            put("username", username);
+            put("cards", new ArrayList<Document>());
+        }};
     }
 
     @Override
@@ -56,6 +61,25 @@ class MongoDB implements CRUD {
 
     @Override
     public void addCard(String username, String deckname, CardDisplay card) {
+
+        Document cardDoc = new Document() {{
+            put("name", card.getName());
+            put("points", card.getPoints());
+        }};
+        Document query = new Document() {{
+            put("deckname", deckname);
+            put("username", username);
+        }};
+
+        Document push = new Document() {{
+            put("cards", cardDoc);
+        }};
+        Document update= new Document() {{
+            put("$push", push);
+
+
+        }};
+        collection.updateOne(query, update);
 
     }
 
@@ -69,29 +93,30 @@ class MongoDB implements CRUD {
         return null;
     }
 
+
     @Override
     public List<Deck> getAllDecks() {
-        try(MongoClient client = MongoClients.create(Main.connectionString)) {
-            MongoDatabase db = client.getDatabase("cardgame");
-            MongoCollection collection = db.getCollection("cards");
+        FindIterable<Document> cursor = collection.find();
+        List<Deck> decks = new ArrayList<>();
+        try (final MongoCursor<Document> cursorIterator = cursor.cursor()) {
+            while (cursorIterator.hasNext()) {
+                Deck deck = new Deck();
+                Document doc = cursorIterator.next();
+                deck.setUsername((String)doc.get("username"));
+                deck.setDeckname((String)doc.get("deckname"));
 
+                List<Document> docCards = (List<Document>) doc.get("cards");
 
-            FindIterable<Document> cursor = collection.find();
-            List<Deck> decks = new ArrayList<>();
-            try (final MongoCursor<Document> cursorIterator = cursor.cursor()) {
-                while (cursorIterator.hasNext()) {
-                    Document doc = cursorIterator.next();
-                    List<Document> docCards = (List<Document>) doc.get("cards");
-
-                    for (int i = 0; i < docCards.size(); i++) {
-                        
-                    }
-                    
-                    System.out.println(cursorIterator.next());
+                List<CardDisplay> cards = new ArrayList<>();
+                for (int i = 0; i < docCards.size(); i++) {
+                    Document d = docCards.get(i);
+                    cards.add(new CardDisplay((String)d.get("name"), (int)d.get("points")));
                 }
+                deck.setCards(cards);
+                decks.add(deck);
             }
+            return decks;
         }
-        return List.of();
     }
 }
 
