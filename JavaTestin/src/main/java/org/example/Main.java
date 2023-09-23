@@ -7,7 +7,7 @@ import org.bson.conversions.Bson;
 
 import javax.print.Doc;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +22,8 @@ public class Main {
             MongoDatabase mongoDatabase = mongoClient.getDatabase("cardgame");
             MongoCollection<Document> collection = mongoDatabase.getCollection("decks");
 
+
+            //______________________________MONGODB
             //GET DECKS
 //            Document query = new Document();
 //            query.put("deckname", "potwory");
@@ -156,11 +158,55 @@ public class Main {
 //
 //            collection.insertMany(List.of(deck1, deck2));
 
-            Deck d1 = new Deck();
-            d1.setUsername("piotrek");
-            d1.setDeckname("mind");
-            d1.setCards(List.of(new CardDisplay("pop", 1), new CardDisplay("tak", 2)));
 
+
+            //______________________________FileSTREAM
+
+            //WRITING DECK
+//            Deck d1 = new Deck();
+//            d1.setUsername("ami");
+//            d1.setDeckname("talia");
+//            d1.setCards(List.of(new CardDisplay("telefon", 1), new CardDisplay("mileczenie", 2)));
+//
+//            Deck d2 = new Deck();
+//            d2.setUsername("piotrek");
+//            d2.setDeckname("ludzie");
+//            d2.setCards(List.of(new CardDisplay("lucznik", 1), new CardDisplay("rycesz", 2)));
+//
+//            try {
+//                ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("decks.txt"));
+//                objectOutputStream.writeObject(d1);
+//                objectOutputStream.writeObject(d2);
+//                objectOutputStream.close();
+//
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+
+
+            //READING DECK
+            try {
+                ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("decks.txt"));
+
+//                Deck readed = (Deck)objectInputStream.readObject();
+//                System.out.println(readed);
+//
+//                Deck readed2 = (Deck)objectInputStream.readObject();
+//                System.out.println(readed2);
+                Deck readed;
+//                while((readed = (Deck)objectInputStream.readObject()) != null) {
+//                    System.out.println(readed);
+//                }
+                while(true) {
+                    readed = (Deck)objectInputStream.readObject();
+                    if(readed == null)
+                        break;
+                    System.out.println(readed);
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 
             //Create file with shell
 //            ProcessBuilder pb = new ProcessBuilder("touch", "decks.txt");
@@ -178,7 +224,7 @@ public class Main {
     }
 }
 
-class Deck {
+class Deck implements Serializable{
     private List<CardDisplay> cards;
     private String username;
     private String deckname;
@@ -215,14 +261,14 @@ class Deck {
 
     @Override
     public String toString() {
-        return "Deck{" +
-                "cards=" + cards +
-                ", username='" + username + '\'' +
-                ", deckname='" + deckname + '\'' +
+        return "{" +
+                "" + cards +
+                ", ='" + username + '\'' +
+                ", ='" + deckname + '\'' +
                 '}';
     }
 }
-class CardDisplay {
+class CardDisplay implements Serializable{
 
     public CardDisplay(String name, int points) {
         this.name = name;
@@ -250,9 +296,9 @@ class CardDisplay {
 
     @Override
     public String toString() {
-        return "CardDisplay{" +
-                "name='" + name + '\'' +
-                ", points=" + points +
+        return "{" +
+                "'" + name + '\'' +
+                ",=" + points +
                 '}';
     }
 }
