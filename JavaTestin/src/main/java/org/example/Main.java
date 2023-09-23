@@ -5,11 +5,13 @@ import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import javax.management.ObjectName;
 import javax.print.Doc;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -163,50 +165,104 @@ public class Main {
             //______________________________FileSTREAM
 
             //WRITING DECK
-//            Deck d1 = new Deck();
-//            d1.setUsername("ami");
-//            d1.setDeckname("talia");
-//            d1.setCards(List.of(new CardDisplay("telefon", 1), new CardDisplay("mileczenie", 2)));
-//
-//            Deck d2 = new Deck();
-//            d2.setUsername("piotrek");
-//            d2.setDeckname("ludzie");
-//            d2.setCards(List.of(new CardDisplay("lucznik", 1), new CardDisplay("rycesz", 2)));
-//
+            Deck d1 = new Deck();
+            d1.setUsername("ami");
+            d1.setDeckname("talia");
+            d1.setCards(List.of(new CardDisplay("telefon", 1), new CardDisplay("mileczenie", 2)));
+
+            Deck d2 = new Deck();
+            d2.setUsername("piotrek");
+            d2.setDeckname("ludzie");
+            d2.setCards(List.of(new CardDisplay("lucznik", 1), new CardDisplay("smok", 2)));
+            List<Deck> decksToSerialize = List.of(d1,d2);
+
+            try {
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("decks.txt"));
+                objectOutputStream.writeObject(decksToSerialize);
+                objectOutputStream.close();
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+
+            //READING DECK
 //            try {
-//                ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("decks.txt"));
-//                objectOutputStream.writeObject(d1);
-//                objectOutputStream.writeObject(d2);
-//                objectOutputStream.close();
+//                ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("decks.txt"));
+//                List<Deck> decks;
+//                decks = (List) objectInputStream.readObject();
+//                decks.forEach(System.out::println);
+//                objectInputStream.close();
+//
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+
+            //ADD CARD TO DECK
+//            try {
+//                ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("decks.txt"));
+//                List<Deck> decks;
+//                decks = (List) objectInputStream.readObject();
+//
+//                Deck deckToChange = decks.stream().filter(d -> d.getUsername().equals("ami") && d.getDeckname().equals("talia"))
+//                                .findFirst().orElse(new Deck());
+//
+//                List<CardDisplay> cards;
+//                cards = deckToChange.getCards().stream().collect(Collectors.toList());
+//                cards.add(new CardDisplay("wild roam", 3));
+//                deckToChange.setCards(cards);
+//
+//
+//                ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream("decks.txt"));
+//                ous.writeObject(decks);
+//                ous.close();
+//                objectInputStream.close();
+//                objectInputStream = new ObjectInputStream(new FileInputStream("decks.txt"));
+//
+//                List<Deck> deckss = (List) objectInputStream.readObject();
+//                deckss.forEach(System.out::println);
+//
+//                objectInputStream.close();
+//
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+
+            //DELETE CARD FROM DECK
+
+//            try {
+//                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("decks.txt"));
+//
+//                ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream("decks.txt"));
+//                List<Deck> decks = (List)ois.readObject();
+//
+//                Deck deckToChange = decks.stream()
+//                        .filter(d -> d.getDeckname().equals("talia") && d.getUsername().equals("ami"))
+//                        .findFirst().orElse(new Deck());
+//
+//                List<CardDisplay> cards = deckToChange.getCards().stream().collect(Collectors.toList());
+//                cards.remove(new CardDisplay("wild roam",3 ) );
+//                deckToChange.setCards(cards);
+//
+//                System.out.println(deckToChange);
+//
+//
+//                ous.writeObject(decks);
+//                ois.close();
+//                ous.close();
+//                ois = new ObjectInputStream(new FileInputStream("decks.txt"));
+//
+//                List<Deck> deckss = (List)ois.readObject();
+//                deckss.forEach(System.out::println);
+//
+//
+//                ois.close();
 //
 //            } catch (Exception e) {
 //                System.out.println(e.getMessage());
 //            }
 
 
-            //READING DECK
-            try {
-                ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("decks.txt"));
-
-//                Deck readed = (Deck)objectInputStream.readObject();
-//                System.out.println(readed);
-//
-//                Deck readed2 = (Deck)objectInputStream.readObject();
-//                System.out.println(readed2);
-                Deck readed;
-//                while((readed = (Deck)objectInputStream.readObject()) != null) {
-//                    System.out.println(readed);
-//                }
-                while(true) {
-                    readed = (Deck)objectInputStream.readObject();
-                    if(readed == null)
-                        break;
-                    System.out.println(readed);
-                }
-
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
 
             //Create file with shell
 //            ProcessBuilder pb = new ProcessBuilder("touch", "decks.txt");
@@ -219,6 +275,25 @@ public class Main {
 //            } catch (Exception e) {
 //                System.out.println(e.getMessage());
 //            }
+
+            //TEST
+            try {
+                CardDisplay testData = new CardDisplay("monkey" , 5);
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("test.txt"));
+                ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream("test.txt"));
+
+                CardDisplay readedData = (CardDisplay) ois.readObject();
+//                ous.writeObject(testData);
+
+                System.out.println(readedData);
+
+
+                ous.close();
+                ois.close();
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
     }
@@ -292,6 +367,12 @@ class CardDisplay implements Serializable{
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        CardDisplay c = (CardDisplay) obj;
+        return c.getName().equals(name);
     }
 
     @Override
