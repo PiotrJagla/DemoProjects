@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class Main {
 
 
@@ -22,13 +23,6 @@ public class Main {
     public static void main(String[] args) {
 
         CRUD crud = new MongoDB();
-//        crud.createDeck("df", "talisfddsfa");
-
-        crud.addCard("df", "talisfddsfa", new CardDisplay("witcher", 12));
-        List<Deck> decks = crud.getAllDecks();
-        decks.forEach(System.out::println);
-
-
 
     }
 }
@@ -52,10 +46,15 @@ class MongoDB implements CRUD {
             put("username", username);
             put("cards", new ArrayList<Document>());
         }};
+        collection.insertOne(quert);
     }
 
     @Override
     public void deleteDeck(String username, String deckname) {
+        collection.deleteOne(new Document() {{
+            put("username", username);
+            put("deckname", deckname);
+        }});
 
     }
 
@@ -85,13 +84,51 @@ class MongoDB implements CRUD {
 
     @Override
     public void deleteCard(String username, String deckname, CardDisplay card) {
+        Document cardDoc = new Document() {{
+            put("name", card.getName());
+            put("points", card.getPoints());
+        }};
+        Document query = new Document() {{
+            put("deckname", deckname);
+            put("username", username);
+        }};
+
+        Document push = new Document() {{
+            put("cards", cardDoc);
+        }};
+        Document update= new Document() {{
+            put("$pull", push);
+
+
+        }};
+        collection.updateOne(query, update);
 
     }
 
     @Override
     public Deck getDeck(String username, String deckname) {
-        return null;
+       Document deckDoc =  (Document)collection.find(new Document() {{
+            put("username", username);
+            put("deckname", deckname);
+        }}).first();
+
+       Deck deck = new Deck();
+       deck.setUsername((String)deckDoc.get("username"));
+       deck.setDeckname((String)deckDoc.get("deckname"));
+       
+
+        List<Document> docCards = (List<Document>) deckDoc.get("cards");
+
+        List<CardDisplay> cards = new ArrayList<>();
+        for (int i = 0; i < docCards.size(); i++) {
+            Document doc = docCards.get(i);
+            cards.add(new CardDisplay((String)doc.get("name"), (int)doc.get("points")));
+        }
+        deck.setCards(cards);
+
+       return deck;
     }
+
 
 
     @Override
