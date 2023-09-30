@@ -109,3 +109,44 @@ traverse(groot);
 console.log("after invert");
 invert(groot);
 traverse(groot);
+
+
+// ---------------------------------------Quicksort
+
+
+
+const quickSort = (arr: number[], start: number, end: number) => {
+    if(start >= end) {
+        return;
+    }
+
+    let pivot:number = arr[end];
+
+    let pIndex = start;
+    for(let i = start; i < end ; ++i) {
+        if(arr[i] < pivot) {
+            let temp = arr[i];
+            arr[i] = arr[pIndex];
+            arr[pIndex] = temp;
+            ++pIndex;
+        }
+    }
+    let temp = arr[pIndex];
+    arr[pIndex] = arr[end];
+    arr[end] = temp;
+
+
+    quickSort(arr, start, pIndex - 1);
+    quickSort(arr, pIndex + 1, end);
+
+}
+
+
+const sort = (arr: number[]) => {
+    quickSort(arr, 0, arr.length - 1);
+
+}
+
+let arr = [9,8,6,4,2,1,7,5,3];
+sort(arr);
+console.log(arr);
