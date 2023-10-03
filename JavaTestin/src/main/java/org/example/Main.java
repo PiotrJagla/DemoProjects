@@ -22,7 +22,13 @@ public class Main {
     public static final String connectionString = "mongodb://localhost:27017";
     public static void main(String[] args) {
 
-        CRUD crud = new MongoDB();
+        try {
+            FileInputStream fff = new FileInputStream(new File("src/main/resources/file.txt"));
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+//        CRUD crud = new MongoDB();
 
     }
 }
