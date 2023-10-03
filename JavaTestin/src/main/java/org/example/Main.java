@@ -4,6 +4,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.example.testClasses.EmployeeClass;
+import org.example.testClasses.EmployeeRecord;
 
 import javax.management.ObjectName;
 import javax.print.Doc;
@@ -21,6 +23,11 @@ public class Main {
 
     public static final String connectionString = "mongodb://localhost:27017";
     public static void main(String[] args) {
+
+        EmployeeClass emp = new EmployeeClass("string", 2);
+        EmployeeRecord employeeRecord = new EmployeeRecord("this is creamer", 5);
+        emp.getEmployeeNumber();
+        employeeRecord.employeeNumber();
 
         try {
             FileInputStream fff = new FileInputStream(new File("src/main/resources/file.txt"));
