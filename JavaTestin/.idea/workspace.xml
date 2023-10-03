@@ -6,28 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="d65681d5-4e49-49ab-ba6b-52838b3f86df" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/CardDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/CardDisplay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Deck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/FileSerialization.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/FileSerialization.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/MongoDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/MongoDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -44,10 +36,23 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Program Files (x86)/GitHub/Webicity"
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "D:/Program Files (x86)/GitHub/DemoProjects/JavaTestin"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.Test">
     <configuration name="Run" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
       <module name="JavaTestin" />
@@ -91,6 +96,20 @@
       <setting name="focusEditor" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="Test" type="JUnit" factoryName="JUnit">
+      <module name="JavaTestin" />
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Run" />
+      <item itemvalue="JUnit.Test" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
