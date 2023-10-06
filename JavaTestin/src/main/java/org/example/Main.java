@@ -24,18 +24,16 @@ public class Main {
     public static final String connectionString = "mongodb://localhost:27017";
     public static void main(String[] args) {
 
-        EmployeeClass emp = new EmployeeClass("string", 2);
-        EmployeeRecord employeeRecord = new EmployeeRecord("this is creamer", 5);
-        emp.getEmployeeNumber();
-        employeeRecord.employeeNumber();
+        InputStreamReader isr = new InputStreamReader(new ByteArrayInputStream(new byte[] {1,2,3,4,5}));
 
+        int next;
         try {
-            FileInputStream fff = new FileInputStream(new File("src/main/resources/file.txt"));
+            while((next = isr.read()) != -1) {
+                System.out.println(next);
+            }
+        } catch (Exception e) {
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         }
-//        CRUD crud = new MongoDB();
 
     }
 }
