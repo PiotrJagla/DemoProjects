@@ -1,17 +1,14 @@
 package org.example;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 enum Token {
     Sentence,
-    Subj,
-    Art,
     Noun,
     Verb,
-    Obj
 }
 
 class Node{
@@ -38,15 +35,20 @@ class Node{
 }
 
 public class Main {
+    // Sentence = Noun Verb Noun
     public static void main(String[] args) {
         String input = "dog bit cat";
         List<Token> tokens = tokenize(input);
         System.out.println(tokens);
+        for (Token t : tokens) {
 
-        Stack<Token> tokenStack = new Stack<>();
+
+        }
 
 
     }
+
+
 
     public static List<Token> tokenize(String input) {
         List<Token> res = new ArrayList<>();
