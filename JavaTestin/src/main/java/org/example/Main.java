@@ -2,108 +2,98 @@ package org.example;
 
 
 
+import org.example.testClasses.Token;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
-enum Token {
-    Number,
-    Add,
-    Multiply,
-}
-
-class Node{
-    Token token;
-    List<Node> children;
-
-    public Node() {
-        children = new ArrayList<>();
-    }
-    public Node(Token token) {
-        this.token = token;
-        children = new ArrayList<>();
-    }
-
-    public Token getToken() {
-        return token;
-    }
-    public void setToken(Token t) {token = t;}
-
-    public List<Node> getChildren() {
-        return children;
-    }
-
-    public void addChild(Node child) {
-        children.add(child);
-    }
-
-
-}
-
-class MyIterator {
-    private String input;
-    private int pos;
-    private char peek;
-
-    public MyIterator(String input) {
-        this.input = input;
-        pos = 0;
-        peek = input.charAt(pos++);
-    }
-
-    public char next() {
-        char c = peek;
-        peek = input.charAt(pos++);
-        return c;
-    }
-
-    public void split(char delimiter, Runnable r) {
-        while(true) {
-            r.run();
-            if(peek == delimiter) {
-                next();
-            } else {
-                break;
-            }
-        }
-    }
-
-    public int number()  {
-        return Integer.parseInt(String.valueOf(peek));
-    }
-
-}
 
 public class Main {
+    static boolean hadError = false;
+
     public static void main(String[] args) {
-        MyIterator iterator = new MyIterator("2*4+3*5");
-        int res = 0;
-        iterator.split('+', () -> {
-            int prod = 1;
-            iterator.split('*', () ->{
-                prod *= iterator.number();
-            });
+        String input = "2+3*2";
+        for (int i = 0; i < input.length(); i++) {
+            if(input.charAt(i) == '*') {
+                int eval = Integer.parseInt(String.valueOf(input.charAt(i - 1))) *  Integer.parseInt(String.valueOf(input.charAt(i + 1)));
+                StringBuilder newExpr = new StringBuilder();
+                if(i - 1 >= 0) {
+                    newExpr.append(input.substring(0, i - 1)) ;
+                }
+                newExpr.append(eval);
+                if(i + 2 < input.length()) {
+                    newExpr.append(input.substring(i + 2)) ;
+                }
+                input = newExpr.toString();
+            }
+        }
+        System.out.println(input);
+        for (int i = 0; i < input.length(); i++) {
+            if(input.charAt(i) == '+') {
+                int eval = Integer.parseInt(String.valueOf(input.charAt(i - 1))) +  Integer.parseInt(String.valueOf(input.charAt(i + 1)));
+                StringBuilder newExpr = new StringBuilder();
+                if(i - 1 >= 0) {
+                    newExpr.append(input.substring(0, i - 1)) ;
+                }
+                newExpr.append(String.valueOf(eval));
+                if(i + 2 < input.length()) {
+                    newExpr.append(input.substring(i + 2, input.length())) ;
+                }
+                input = newExpr.toString();
+            }
+        }
 
-        });
+        System.out.println(input);
+
+//        if(args.length > 1) {
+//            System.out.println("Usage: jlox [script]");
+//            if(hadError) {
+//                System.exit(64);
+//            }
+//        } else if (args.length == 1) {
+//            runFile(args[0]);
+//        } else {
+//            runPrompt();
+//        }
     }
 
+    private static void runFile(String path) throws IOException {
+        byte[] bytes = Files.readAllBytes(Paths.get(path));
+        run(new String(bytes, Charset.defaultCharset()));
+    }
 
-    public static void split(char delimiter, Runnable r, Iterator<Character> iter) {
+    private static void runPrompt() throws IOException {
+        InputStreamReader input = new InputStreamReader(System.in);
+        BufferedReader reader = new BufferedReader(input);
+
         while(true) {
-            r.run();
-
+            System.out.print("> ");
+            String line = reader.readLine();
+            if(line == null) break;
+            run(line);
+            hadError = false;
         }
     }
-
-
-
-    public static void traverse(Node node) {
-        if(node.getChildren().size() == 0) {
-            return;
-        }
-
-        System.out.println(node.getToken());
-        for (Node child : node.getChildren()) {
-            traverse(child);
-        }
+    private static void run(String source) {
+        Scanner scanner = new Scanner(source);
+//        List<Token> tokens = scanner.scanTokens();
+//
+//        for (Token token : tokens) {
+//            System.out.println(tokens);
+//        }
     }
+    public static void error(int line, String message) {
+        report(line, "", message);
+    }
+     private static void report(int line, String where, String message) {
+        System.err.println("[line " + line + "] Error" + where + ": " + message);
+        hadError = true;
+     }
+
 
 }
