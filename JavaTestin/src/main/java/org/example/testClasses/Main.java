@@ -18,6 +18,8 @@ import java.util.*;
 
 public class Main {
     static boolean hadError = false;
+    static boolean hadRuntimeError = false;
+    private static final Interpreter interpreter = new Interpreter();
 
     public static void main(String[] args) {
         try {
@@ -25,6 +27,9 @@ public class Main {
                 System.out.println("Usage: jlox [script]");
                 if(hadError) {
                     System.exit(64);
+                }
+                if(hadRuntimeError) {
+                    System.exit(70);
                 }
             } else if (args.length == 1) {
                 runFile(args[0]);
@@ -62,7 +67,7 @@ public class Main {
 
         if(hadError) return;
 
-        System.out.println(new AstPrinter().print(root));
+        interpreter.interpret(root);
     }
     public static void error(int line, String message) {
         report(line, "", message);
@@ -81,4 +86,8 @@ public class Main {
      }
 
 
+    public static void runtimeError(RuntimeError e) {
+        System.err.println(e.getMessage() + "\n[line " + e.token.line() + "]");
+        hadRuntimeError= true;
+    }
 }
