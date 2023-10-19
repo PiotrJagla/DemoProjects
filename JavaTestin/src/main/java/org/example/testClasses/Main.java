@@ -67,7 +67,8 @@ public class Main {
 
         if(hadError) return;
 
-        interpreter.interpret(root);
+//        interpreter.interpret(root);
+        System.out.println(new AstPrinter().print(root));
     }
     public static void error(int line, String message) {
         report(line, "", message);

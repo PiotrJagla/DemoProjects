@@ -78,6 +78,13 @@ public class MyScanner {
             case '/':
                 if (match('/')) {
                     while(peek() != '\n' && !isAtEnd()) {advance(); }
+                } else if(match('*')) {
+                    while(!isAtEnd()) {
+                        advance();
+                        if(match('*') && match('/')) {
+                            break;
+                        }
+                    }
                 } else {
                     addToken(TokenType.SLASH);
                 }
