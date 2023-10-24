@@ -63,12 +63,12 @@ public class Main {
         MyScanner scanner = new MyScanner(source);
         List<Token> tokens = scanner.scanTokens();
         Parser parser = new Parser(tokens);
-        Expr root = parser.parse();
+        List<Stmt> statements = parser.parse();
 
         if(hadError) return;
 
-        interpreter.interpret(root);
-//        System.out.println(new AstPrinter().print(root));
+        interpreter.interpret(statements);
+//        System.out.println(new AstPrinter().print(statements));
     }
     public static void error(int line, String message) {
         report(line, "", message);

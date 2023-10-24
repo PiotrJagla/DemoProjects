@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="d65681d5-4e49-49ab-ba6b-52838b3f86df" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/AstPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/AstPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Expr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Expr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/tool/GenerateAst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/tool/GenerateAst.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +64,7 @@
     <configuration name="Generate Exprs" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.example.tool.GenerateAst" />
       <module name="JavaTestin" />
-      <option name="PROGRAM_PARAMETERS" value=".\src\main\java\org\example\testClasses\expressions" />
+      <option name="PROGRAM_PARAMETERS" value=".\src\main\java\org\example\testClasses" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

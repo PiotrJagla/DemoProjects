@@ -1,14 +1,21 @@
 package org.example.testClasses;
 
-public class Interpreter implements Expr.Visitor<Object>{
+import java.util.List;
 
-    public void interpret(Expr expression) {
+public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
+
+    public void interpret(List<Stmt> statements) {
         try {
-            Object value = evaluate(expression);
-            System.out.println(stringify(value));
+            for (Stmt statement : statements) {
+                execute(statement);
+            }
         } catch (RuntimeError e) {
             Main.runtimeError(e);
         }
+    }
+
+    private void execute(Stmt stmt) {
+        stmt.accept(this);
     }
 
     private String stringify(Object object) {
@@ -117,6 +124,11 @@ public class Interpreter implements Expr.Visitor<Object>{
         return null;
     }
 
+    @Override
+    public Object visitVariableExpr(Expr.Variable expr) {
+        return null;
+    }
+
     private void checkNumberOperand(Token operator, Object operand) {
         if(operand instanceof Double) return;
         throw new RuntimeError(operator, "Operand must be a number.");
@@ -131,6 +143,24 @@ public class Interpreter implements Expr.Visitor<Object>{
 
     private Object evaluate(Expr expr) {
         return expr.accept(this);
+    }
+
+    @Override
+    public Void visitExpressionStmt(Stmt.Expression stmt) {
+        evaluate(stmt.expression);
+        return null;
+    }
+
+    @Override
+    public Void visitPrintStmt(Stmt.Print stmt) {
+        Object value = evaluate(stmt.expression);
+        System.out.println(stringify(value));
+        return null;
+    }
+
+    @Override
+    public Void visitVarStmt(Stmt.Var stmt) {
+        return null;
     }
 }
 
