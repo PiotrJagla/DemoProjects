@@ -7,8 +7,8 @@ public abstract class Node {
 
     private List<Node> children;
 
-    public Node() {
-        this.children = new ArrayList<>();
+    public Node(List<Node> children) {
+        this.children = children;
     }
 
     public List<Node> getChildren() {
@@ -18,5 +18,5 @@ public abstract class Node {
     public void addChild(Node child) {
         this.children.add(child);
     }
-    
+
 }

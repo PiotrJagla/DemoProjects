@@ -1,5 +1,8 @@
 package com.mygdx.game.browser;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -11,6 +14,11 @@ public class HTMLParser {
     public HTMLParser(String input) {
         this.input = input;
         pos = 0;
+    }
+
+    public Node parse() {
+        Node root = parseNode();
+        return root;
     }
 
     private char peek() {
@@ -45,7 +53,53 @@ public class HTMLParser {
         consume();
 
         List<Node> children = parseNodes();
-        return null;
+        consume();
+        consume();
+        parseTagName();
+        consume();
+        return new ElementNode(tagName, attrs, children);
+    }
+
+    private List<Node> parseNodes() {
+        List<Node> nodes = new ArrayList<>();
+        while(true) {
+            consumeWhitespace();
+            if(eof() || startsWith("</")) {
+                break;
+            }
+            Node n = parseNode();
+            nodes.add(n);
+        }
+        return nodes;
+    }
+
+    private Map<String,String> parseAttrs() {
+        Map<String,String> attrs = new HashMap<>();
+        while(true) {
+            consumeWhitespace();
+            if(eof() || peek() == '>') {
+                break;
+            }
+            String oneAttr = parseAttr();
+            String[] ggg = oneAttr.split("#");
+            attrs.put(ggg[0], ggg[1]);
+        }
+        return attrs;
+    }
+
+    private String parseAttr() {
+        String name = parseTagName();
+        consume();
+        String value = parseAttrValue();
+        return name + "#" + value;
+    }
+
+    private String parseAttrValue() {
+        char openQ = consume();
+        System.out.println(openQ);
+        String value = consumeUntil(c -> c != openQ);
+        consume();
+        return value;
     }
 
     private Node parseText() {
@@ -57,7 +111,9 @@ public class HTMLParser {
     }
 
     private void consumeWhitespace() {
-        consumeUntil((character -> character != ' ' && character != '\n'));
+        consumeUntil((character -> character == ' ' || character == '\n'));
+//        if(peek() == ' ' ||)
+
     }
 
     private String consumeUntil(Predicate<Character> test) {
