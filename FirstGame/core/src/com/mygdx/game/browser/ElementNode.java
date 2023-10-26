@@ -17,12 +17,16 @@ public class ElementNode extends Node{
     }
 
 
-    private void addAttr(String key, String value) {
+    public void addAttr(String key, String value) {
         attrMap.put(key, value);
     }
 
-    private String getAttr(String key) {
+    public String getAttr(String key) {
         return attrMap.get(key);
+    }
+
+    public Map<String,String> getAttrMap() {
+        return attrMap;
     }
 
     public String getTagName() {
