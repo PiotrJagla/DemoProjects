@@ -12,7 +12,7 @@ public class Stylesheet {
         return rules;
     }
 
-    public void addRule(Rule rule) {
-        this.rules.add(rule);
+    public void setRules(List<Rule> rules) {
+        this.rules = rules;
     }
 }

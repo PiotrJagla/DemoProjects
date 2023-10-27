@@ -5,31 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d65681d5-4e49-49ab-ba6b-52838b3f86df" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/CSSSelector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuickTestings/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/BrowserMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/BrowserMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/CSSParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/CSSParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Declaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Declaration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Selector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Stylesheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Stylesheet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/AstPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/AstPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Expr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Expr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Interpreter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Stmt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/testClasses/Stmt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/tool/GenerateAst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/tool/GenerateAst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/AstPrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/AstPrinter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Binary.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Binary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Grouping.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Grouping.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Literal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Literal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Unary.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Unary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Visitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr$Visitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Expr.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Interpreter$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Interpreter$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Interpreter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Interpreter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Parser$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Parser$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Parser$ParseError.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Parser$ParseError.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Parser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/RuntimeError.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/RuntimeError.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Stmt$Expression.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Stmt$Expression.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Stmt$Print.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Stmt$Print.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Stmt$Visitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Stmt$Visitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/testClasses/Stmt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/testClasses/Stmt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/tool/GenerateAst.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/tool/GenerateAst.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +51,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "jdk.selected.JAVA_MODULE": "18",
     "last_opened_file_path": "D:/Program Files (x86)/GitHub/DemoProjects/JavaTestin",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
@@ -79,7 +67,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="Application.RunQuickTestings">
     <configuration name="Generate Exprs" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.example.tool.GenerateAst" />
       <module name="JavaTestin" />
@@ -88,9 +76,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Run" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="org.example.testClasses.Main" />
-      <module name="JavaTestin" />
+    <configuration name="RunQuickTestings" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.example.Main" />
+      <module name="QuickTestings" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -142,7 +130,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Run" />
+      <item itemvalue="Application.RunQuickTestings" />
       <item itemvalue="Application.Generate Exprs" />
       <item itemvalue="JUnit.Test" />
     </list>

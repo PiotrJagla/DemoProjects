@@ -5,27 +5,22 @@ import java.util.Map;
 public class BrowserMain {
 
     public static void main(String[] args) {
+        //HTML parser
 //        HTMLParser parser = new HTMLParser("<html>" +
-//                    "<body>" +
-//                        "<h1>Title</h1>" +
-//                        "<div id='main' class='test'>" +
-//                            "<p>Hello <em>world</em>!</p>" +
-//                        "</div>" +
-//                    "</body>" +
+//                "<body>" +
+//                "<h1>Title</h1>" +
+//                "<div id=\"main\" class=\"ltest\">" +
+//                "<p>Hello <em>world</em>!</p>" +
+//                "</div>" +
+//                "</body>" +
 //                "</html>");
+//        HTMLParser parser1 = new HTMLParser("<div name=\"this is name\" class=\"firstClass\" > Hello </div>");
+//        Node root = parser.parse();
+//        printTree(root);
 
-        HTMLParser parser = new HTMLParser("<html>" +
-                "<body>" +
-                "<h1>Title</h1>" +
-                "<div id=\"main\" class=\"ltest\">" +
-                "<p>Hello <em>world</em>!</p>" +
-                "</div>" +
-                "</body>" +
-                "</html>");
-        HTMLParser parser1 = new HTMLParser("<div name=\"this is name\" class=\"firstClass\" > Hello </div>");
-        Node root = parser.parse();
-        printTree(root);
-//        System.out.println("hello world");
+        CSSParser cssParser = new CSSParser("div{ padding: auto;}");
+        Stylesheet stylesheet = cssParser.parse();
+        System.out.print("Done");
     }
 
     public static void printTree(Node root) {
