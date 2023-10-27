@@ -75,7 +75,7 @@ public class CSSParser {
 
         while(!eof()) {
 
-            boolean didMatch = false;
+            boolean didMatch = true;
             switch(peek()) {
                 case '#':
                     consume();
@@ -87,10 +87,17 @@ public class CSSParser {
                     break;
                 case '*':
                     consume();
+                    break;
                 default:
                     if(validIdentifierChar(peek())) {
                         selector.setTagName(Optional.of(parseIdentifier()));
                     }
+                    else {
+                        didMatch = false;
+                    }
+            }
+            if(!didMatch) {
+               break;
             }
         }
         return selector;
@@ -104,7 +111,7 @@ public class CSSParser {
 
         while(true) {
             consumeWhitespace();
-            if(consume() == '}') {
+            if(peek() == '}') {
                 consume();
                 break;
             }
@@ -186,7 +193,7 @@ public class CSSParser {
     private int parseHexPair() {
         String s = input.substring(pos, pos+2);
         pos += 2;
-        return Integer.parseInt(s);
+        return Integer.parseInt(s, 16);
     }
 
     private String parseIdentifier() {

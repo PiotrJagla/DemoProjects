@@ -18,7 +18,11 @@ public class BrowserMain {
 //        Node root = parser.parse();
 //        printTree(root);
 
-        CSSParser cssParser = new CSSParser("div{ padding: auto;}");
+        CSSParser cssParser = new CSSParser(
+            "div.h1 { padding: auto; }" +
+                    "p,ul,li {color:#cc0011; margin: 20px; }" +
+                    "#andwer {display  :  none; }"
+        );
         Stylesheet stylesheet = cssParser.parse();
         System.out.print("Done");
     }

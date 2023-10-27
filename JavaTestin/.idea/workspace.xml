@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d65681d5-4e49-49ab-ba6b-52838b3f86df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/CSSSelector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuickTestings/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/BrowserMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/BrowserMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/CSSParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/CSSParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Declaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Declaration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Selector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Stylesheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Stylesheet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d65681d5-4e49-49ab-ba6b-52838b3f86df" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
