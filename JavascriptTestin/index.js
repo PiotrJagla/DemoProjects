@@ -1,53 +1,31 @@
+const socket = new WebSocket('wss://63mgnuyfr6.execute-api.eu-north-1.amazonaws.com/production/')
+console.log('start')
 
-let input = "2*(6+4)*5"
-let pos = 0
-let peek = input.charAt(pos++)
+const startTime = 0;
+const endTime = 0;
 
-function next() {
-    let c = peek;
-    peek = input.charAt(pos++);
-    return c;
-}
+socket.addEventListener('open', e => {
+    const startTime = new Date();
+    console.log(e)
+    console.log("websocket is connected")
+})
 
-function split(delimiter, callback) {
-    while(true) {
-        callback();
-        if(peek === delimiter){ 
-            next();
-        } else {
-            break;
-        }
+socket.addEventListener('close', e => {
+    const endTime = new Date();
+    console.log("time from open to close is: " + (endTime - startTime))
+    console.log(e)
+    console.log("websocket is closed")
+})
+
+socket.addEventListener('message', e => {
+    console.log(JSON.parse(e.data).message)
+    // console.log("your answer is:", JSON.parse(e.data).message)
+})
+
+window.ask = function (msg) {
+    const payload = {
+        action: 'message',
+        msg
     }
+    socket.send(JSON.stringify(payload))
 }
-
-function number() {
-    let isDigit = () => '0' <= peek && peek <= '9'
-    let n = Number(next())
-    while(isDigit()) {
-        console.log(n);
-        n = n * 10 + Number(next())
-    }
-    return n;
-}
-
-function expr() {
-    let res = 0
-    split('+', () => {
-        let prod = 1
-        split('*', () => {
-            if(peek === '(') {
-                next()
-                prod *= expr()
-                next()
-            }
-            else {
-                prod *= number()
-            }
-        })
-        res += prod
-    })
-    return res;
-}
-
-console.log(expr());
-

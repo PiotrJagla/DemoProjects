@@ -18,14 +18,23 @@ public class BrowserMain {
         Node root = parser.parse();
         printTree(root);
 
-        //CSSParser
-//        CSSParser cssParser = new CSSParser(
-//            "div.h1 { padding: auto; }" +
-//                    "p,ul,li {color:#cc0011; margin: 20px; }" +
-//                    "#andwer {display  :  none; }"
-//        );
-//        Stylesheet stylesheet = cssParser.parse();
-//        System.out.print("Done");
+//        CSSParser
+        CSSParser cssParser = new CSSParser(
+            "h1 { padding: auto; }" +
+                    ".ltest {color:#cc0011; margin: 20px; }" +
+                "p{display:block; padding: 20px; }"
+        );
+        Stylesheet stylesheet = cssParser.parse();
+
+        //Styling DOM tree
+        Style style = new Style();
+        StyledNode styledTreeRoot = style.styleTree(root,stylesheet);
+        System.out.println("Styling done");
+
+        //Layout
+        Layout layout = new Layout();
+        LayoutBox layoutRoot = layout.buildLayoutTree(styledTreeRoot);
+        System.out.println("Layout done");
     }
 
     public static void printTree(Node root) {

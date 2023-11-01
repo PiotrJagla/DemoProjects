@@ -4,7 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d65681d5-4e49-49ab-ba6b-52838b3f86df" name="Changes" comment="" />
+    <list default="true" id="d65681d5-4e49-49ab-ba6b-52838b3f86df" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Browser/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/BrowserMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/BrowserMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/CSSParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/CSSParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/CSSSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/CSSSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Declaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/Declaration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/HTMLParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/HTMLParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Layout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/Layout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Style.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/Style.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Stylesheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/Stylesheet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirstGame/core/src/com/mygdx/game/browser/Value.java" beforeDir="false" afterPath="$PROJECT_DIR$/Browser/src/main/java/org/example/browser/Value.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavascriptTestin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavascriptTestin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TypescriptTestin/archive.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TypescriptTestin/index.test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TypescriptTestin/jest.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TypescriptTestin/sum.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TypescriptTestin/sum.test.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +62,9 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "jdk.selected.JAVA_MODULE": "18",
     "last_opened_file_path": "D:/Program Files (x86)/GitHub/DemoProjects/JavaTestin",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>

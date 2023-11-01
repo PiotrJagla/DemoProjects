@@ -2,7 +2,6 @@ package com.mygdx.game.browser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public abstract class CSSSelector {
 
@@ -23,28 +22,32 @@ public abstract class CSSSelector {
 
 
 class SimpleSelector extends CSSSelector {
-    private Optional<String> tagName = Optional.of("");
-    private Optional<String> id = Optional.of("");
+    private String tagName = "";
+    private String id = "";
     private List<String> classes = new ArrayList<>();
 
 
     @Override
     public Specifity specifity() {
-        int a = getId().isPresent() ? 1 : 0;
+        int a = getId().equals("") ? 1 : 0;
         int b = getClasses().size();
-        int c = getTagName().isPresent() ? 1 : 0;
+        int c = getTagName().equals("") ? 1 : 0;
         return new Specifity(a,b,c);
     }
 
-    public void setTagName(Optional<String> tagName) {
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
         this.tagName = tagName;
     }
 
-    public Optional<String> getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Optional<String> id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -55,14 +58,6 @@ class SimpleSelector extends CSSSelector {
     public void setClasses(List<String> classes) {
         this.classes = classes;
     }
-    public void addClass(String c) {
-        this.classes.add(c);
-    }
-
-    public Optional<String> getTagName() {
-        return tagName;
-    }
-
 }
 
 class Specifity{

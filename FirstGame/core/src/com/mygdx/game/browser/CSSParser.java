@@ -1,6 +1,9 @@
 package com.mygdx.game.browser;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 public class CSSParser {
@@ -79,18 +82,18 @@ public class CSSParser {
             switch(peek()) {
                 case '#':
                     consume();
-                    selector.setId(Optional.of(parseIdentifier()));
+                    selector.setId(parseIdentifier());
                     break;
                 case '.':
                     consume();
-                    selector.addClass(parseIdentifier());
+                    selector.getClasses().add(parseIdentifier());
                     break;
                 case '*':
                     consume();
                     break;
                 default:
                     if(validIdentifierChar(peek())) {
-                        selector.setTagName(Optional.of(parseIdentifier()));
+                        selector.setTagName(parseIdentifier());
                     }
                     else {
                         didMatch = false;

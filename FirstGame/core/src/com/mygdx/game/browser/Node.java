@@ -23,7 +23,7 @@ class ElementNode extends Node{
     }
 
     public HashSet<String> classes() {
-        return new HashSet<>(Arrays.stream(attrMap.get("class").split(" ")).collect(Collectors.toSet()));
+        return new HashSet<>(Arrays.stream(attrMap.getOrDefault("class", "").split(" ")).collect(Collectors.toSet()));
     }
 
 

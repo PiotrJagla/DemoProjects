@@ -1,0 +1,44 @@
+const AWS = require('aws-sdk')
+const api = new AWS.ApiGatewayManagementApi({
+  endpoint: '63mgnuyfr6.execute-api.eu-north-1.amazonaws.com/production/'
+})
+
+const options = ['Tes', 'No', 'Maybe', 'Probably', 'Probably not', 'are you crazy?']
+
+export const handler = async (event) => {
+  console.log(event)
+  
+  const route  = event.requestContext.routeKey
+  const connectionId = event.requestContext.connectionId
+  
+  switch(route) {
+    case '$connect':
+      console.log('connection occured')
+      break
+    case '$disconnect':
+      console.log('disconnection occured')
+      break
+    case 'message':
+      console.log('Message received', event)
+      await reply(options[Math.floor(Math.random() * options.length)], connectionId)
+      break
+    default:
+      console.log('Unknown route hit ' , route)
+  }
+  
+  return {
+    statusCode:200 
+  }
+}
+
+
+async function reply(response, connectionId) {
+  const data = { message: response}
+  const params = {
+    ConnectionIf: connectionId,
+    Data: Buffer.from(JSON.stringify(data))
+  }
+  
+  return api.postToConnection(params).promise()
+}
+

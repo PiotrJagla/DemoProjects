@@ -42,10 +42,10 @@ enum Unit{
 }
 
 class Color extends Value{
-    private int r;
-    private int g;
-    private int b;
-    private int a;
+    private int r = 0;
+    private int g = 0;
+    private int b = 0;
+    private int a = 255;
 
     public int getR() {
         return r;

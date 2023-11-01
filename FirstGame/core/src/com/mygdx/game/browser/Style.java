@@ -1,19 +1,37 @@
 package com.mygdx.game.browser;
 
-import com.badlogic.gdx.utils.Select;
-
-import java.security.Key;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Style {
+
+    public StyledNode styleTree(Node root, Stylesheet stylesheet) {
+        StyledNode styledNode = new StyledNode();
+        styledNode.setNode(root);
+        if(root instanceof TextNode) {
+            styledNode.setSpecifiedValues(new PropertyMap());
+        } else if (root instanceof ElementNode) {
+            styledNode.setSpecifiedValues(specifiedValues((ElementNode) root, stylesheet));
+            for (Node child : ((ElementNode) root).getChildren()) {
+                styledNode.getChildren().add(styleTree(child, stylesheet));
+            }
+        }
+
+        return styledNode;
+    }
+
     private boolean matches(ElementNode elem, SimpleSelector selector) {
         //Matches simple selector
-        if(!elem.getTagName().equals(selector.getTagName())) {
+
+        if(elem.getTagName().equals("div")) {
+            System.out.println("here");
+        }
+        //TODO: change this matched function when whole engine is ready
+        if(!selector.getTagName().equals("") && !selector.getTagName().equals(elem.getTagName())) {
             return false;
         }
 
-        if(!selector.getId().get().equals(elem.id())) {
+        if(!selector.getId().equals("") && !selector.getId().equals(elem.id())) {
             return false;
         }
 
@@ -25,7 +43,7 @@ public class Style {
         return true;
     }
 
-    public MatchedRule matchRule(ElementNode elem, Rule rule) {
+    private MatchedRule matchRule(ElementNode elem, Rule rule) {
         CSSSelector r = rule.getSelectors().stream().filter(s -> matches(elem, (SimpleSelector) s)).findFirst().orElse(null);
         if(r == null) {
             return null;
@@ -36,11 +54,11 @@ public class Style {
         return mr;
     }
 
-    public List<MatchedRule> matchRules(ElementNode elem, Stylesheet stylesheet) {
+    private List<MatchedRule> matchRules(ElementNode elem, Stylesheet stylesheet) {
         return stylesheet.getRules().stream().map(r -> matchRule(elem,r)).filter(mr -> mr != null).collect(Collectors.toList());
     }
 
-    public PropertyMap specifiedValues(ElementNode elem, Stylesheet stylesheet) {
+    private PropertyMap specifiedValues(ElementNode elem, Stylesheet stylesheet) {
         HashMap<String,Value> values = new HashMap<>();
         List<MatchedRule> rules = matchRules(elem,stylesheet);
 
@@ -70,18 +88,6 @@ public class Style {
         return pm;
     }
 
-    public StyledNode styleTree(Node root, Stylesheet stylesheet) {
-        StyledNode styledNode = new StyledNode();
-        styledNode.setNode(root);
-        if(root instanceof TextNode) {
-            styledNode.setSpecifiedValues(new PropertyMap());
-        } else if (root instanceof ElementNode) {
-            styledNode.setSpecifiedValues(specifiedValues((ElementNode) root, stylesheet));
-        }
-        List<StyledNode> children = ((ElementNode) root).getChildren().stream().map(c -> styleTree(c, stylesheet)).collect(Collectors.toList());
-        styledNode.setChildren(children);
-        return styledNode;
-    }
 }
 
 class PropertyMap{
@@ -118,8 +124,8 @@ class MatchedRule{
 }
 class StyledNode {
     private Node node;
-    private PropertyMap specifiedValues;
-    private List<StyledNode> children;
+    private PropertyMap specifiedValues = new PropertyMap();
+    private List<StyledNode> children = new ArrayList<>();
 
     public Node getNode() {
         return node;
